@@ -15,7 +15,7 @@ pipeline {
 			stage('Deploy') {
 				steps {
 					echo 'Deploying....'
-					sh "rsync -avzP ./* /data/www/dasecho.net/ && cd /data/www/web-svc && docker-compose create --build --force-recreate dasecho "
+					sh "rsync -avzP ./* /data/www/dasecho.net/ && cd /data/www/web-svc && docker-compose create --build --force-recreate dasecho && docker-compose restart dasecho"
 				}
 			}
 		}
