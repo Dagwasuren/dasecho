@@ -1,0 +1,16 @@
+{
+  "name": "dasecho",
+  "version": "1.0.0",
+  "description": "A universal write platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/dasecho/dasecho.git",
+  "author": "ZhiFeng Hu <huzhifeng@douyu.tv>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dasecho/dasecho/issues"
+  },
+  "homepage": "https://github.com/dasecho/dasecho#readme"
+}
