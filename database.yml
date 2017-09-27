@@ -1,0 +1,11 @@
+development:
+  dialect: "sqlite3"
+  database: /home/huzhifeng/go/src/github.com/dasecho/dasecho/dasecho_development.sqlite
+
+test:
+  dialect: "sqlite3"
+  database: /home/huzhifeng/go/src/github.com/dasecho/dasecho/dasecho_test.sqlite
+
+production:
+  dialect: "sqlite3"
+  database: /home/huzhifeng/go/src/github.com/dasecho/dasecho/dasecho_production.sqlite
