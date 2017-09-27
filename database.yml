@@ -1,12 +1,12 @@
 development:
   dialect: "sqlite3"
-  database: /data/www/dasecho.net/dasecho_development.sqlite
+  database: /data/sqlite_data/dasecho_development.sqlite
 
 test:
   dialect: "sqlite3"
-  database: /data/www/dasecho.net/dasecho_development.sqlite
+  database: /data/sqlite_data/dasecho_development.sqlite
 
 production:
   dialect: "sqlite3"
-  database: /data/www/dasecho.net/dasecho_development.sqlite
+  database: /data/sqlite_data/dasecho_development.sqlite
 
