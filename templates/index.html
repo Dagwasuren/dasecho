@@ -127,7 +127,18 @@
 </style>
 
 <header>
-    <h1>DasEcho</h1>
+  <div class="login">
+    <p>Login with:
+        <ul>
+            <%= for (pvd) in Providers { %>
+              <%= for (pvdk, pvdv) in pvd { %>
+              <li><a href="/auth/<%= pvdv %>"><%= pvdk %></a></li>
+              <% } %>
+              <% } %>
+          </ul>
+    </p>
+  </div>
+  <h1>DasEcho</h1>
 </header>
 
 <div class="row">
@@ -138,7 +149,7 @@
       </div>
     </div>
     <div class="table-responsive">
-        A universal write platform
+      A universal write platform
     </div>
   </div>
 </div>
