@@ -2,8 +2,7 @@
 
 A universal write platform
 
+# Document
 
-## Credit
+https://doc.dasecho.net
 
-
-Thanks  https://github.com/markbates/goth provide us oauth login solution
