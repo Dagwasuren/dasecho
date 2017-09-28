@@ -132,7 +132,7 @@
         <ul>
             <%= for (pvd) in Providers { %>
               <%= for (pvdk, pvdv) in pvd { %>
-              <li><a href="/auth/<%= pvdv %>"><%= pvdk %></a></li>
+              <li><a href="/auth/<%= pvdk %>"><%= pvdv %></a></li>
               <% } %>
               <% } %>
           </ul>
