@@ -3,3 +3,4 @@ theme: yeti
 pages:
     - Home: index.md
     - Contribute: contribute.md
+    - Credits: credits.md
