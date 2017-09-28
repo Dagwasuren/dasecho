@@ -2,4 +2,4 @@ site_name: DasEcho Document
 theme: yeti
 pages:
     - Home: index.md
-      Contribute: contribute.md
+    - Contribute: contribute.md
