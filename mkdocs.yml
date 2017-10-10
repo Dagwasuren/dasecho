@@ -1,2 +1,6 @@
 site_name: DasEcho Document 
-theme: bootstrap
+theme: yeti
+pages:
+    - Home: index.md
+    - Contribute: contribute.md
+    - Credits: credits.md
