@@ -62,6 +62,11 @@ func App() *buffalo.App {
 
 		app.GET("/", HomeHandler)
 
+		aG := app.Group("/auth")
+		aG.GET("/facebook", AuthFacebookHandler)
+		aG.GET("/github", AuthGithubHandler)
+		aG.GET("/twitter", AuthTwitterHandler)
+		aG.GET("/google", AuthGoogleHandler)
 		app.ServeFiles("/assets", packr.NewBox("../public/assets"))
 	}
 
