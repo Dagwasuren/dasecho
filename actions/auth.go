@@ -17,6 +17,10 @@ import (
 func AuthInit() {
 	gothic.Store = App().SessionStore
 	log.Println(WebHost)
+	if WebHost == "" {
+		WebHost = "https://dasecho.net"
+		log.Println("Using default uri " , WebHost)
+	}
 	goth.UseProviders(
 	facebook.New(os.Getenv("FACEBOOK_KEY"), os.Getenv("FACEBOOK_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/facebook/callback")),
 	github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/github/callback")),
