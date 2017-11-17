@@ -10,6 +10,7 @@ import (
 func main() {
 	addr := envy.Get("ADDR", ":3000")
 	app := actions.App()
+	app.Host = "https://dasecho.net"
 	app.Addr = addr
 	log.Fatal(app.Serve())
 }
