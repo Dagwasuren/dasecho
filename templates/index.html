@@ -159,4 +159,14 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <%= for (a) in articles { %>
+  <div>
+    <h3><%= a.Title %></h3>
+    <div>
+     <%= raw(a.Content) %>
+    </div>
+  </div>
+  <% } %>
+</div>
 <div class="foot"> <span> All rights reserved by DasEcho Team</span> </div>
