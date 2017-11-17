@@ -7,25 +7,15 @@ import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
-	"github.com/markbates/goth/providers/facebook"
-  "github.com/markbates/goth/providers/github"
-  "github.com/markbates/goth/providers/twitter"
   "github.com/markbates/goth/providers/gplus"
 
 )
 
-func AuthInit() {
+func init() {
 	gothic.Store = App().SessionStore
-	log.Println(WebHost)
-	if WebHost == "" {
-		WebHost = "https://dasecho.net"
-		log.Println("Using default uri " , WebHost)
-	}
+	log.Println("The app Host: ", app.Host)
 	goth.UseProviders(
-	facebook.New(os.Getenv("FACEBOOK_KEY"), os.Getenv("FACEBOOK_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/facebook/callback")),
-	github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/github/callback")),
-	twitter.New(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/twitter/callback")),
-	gplus.New(os.Getenv("GPLUS_KEY"), os.Getenv("GPLUS_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/gplus/callback")),
+		gplus.New(os.Getenv("GPLUS_KEY"), os.Getenv("GPLUS_SECRET"), fmt.Sprintf("%s%s", app.Host, "/auth/gplus/callback")),
 	)
 }
 
