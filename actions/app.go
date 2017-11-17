@@ -11,6 +11,8 @@ import (
 	"github.com/gobuffalo/buffalo/middleware/csrf"
 	"github.com/gobuffalo/buffalo/middleware/i18n"
 	"github.com/gobuffalo/packr"
+
+	"github.com/markbates/goth/gothic"
 )
 
 // ENV is used to help switch settings based on where the
@@ -61,12 +63,10 @@ func App() *buffalo.App {
 
 		app.GET("/", HomeHandler)
 
-		aG := app.Group("/auth")
-		aG.GET("/facebook", AuthFacebookHandler)
-		aG.GET("/github", AuthGithubHandler)
-		aG.GET("/twitter", AuthTwitterHandler)
-		aG.GET("/google", AuthGoogleHandler)
 		app.ServeFiles("/assets", packr.NewBox("../public/assets"))
+		auth := app.Group("/auth")
+		auth.GET("/{provider}", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))
+		auth.GET("/{provider}/callback", AuthCallback)
 	}
 
 	return app
