@@ -8,7 +8,8 @@ import (
 )
 
 func main() {
-	port := envy.Get("PORT", "3000")
+	addr := envy.Get("ADDR", ":3000")
 	app := actions.App()
-	log.Fatal(app.Start(port))
+	app.Addr = addr
+	log.Fatal(app.Serve())
 }

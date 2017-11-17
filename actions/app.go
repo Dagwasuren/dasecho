@@ -24,7 +24,7 @@ var T *i18n.Translator
 // application.
 func App() *buffalo.App {
 	if app == nil {
-		app = buffalo.Automatic(buffalo.Options{
+		app = buffalo.New(buffalo.Options{
 			Env:         ENV,
 			SessionName: "_dasecho_session",
 		})
@@ -36,7 +36,6 @@ func App() *buffalo.App {
 
 		// Automatically save the session if the underlying
 		// Handler does not return an error.
-		app.Use(middleware.SessionSaver)
 
 		if ENV == "development" {
 			app.Use(middleware.ParameterLogger)
@@ -45,7 +44,7 @@ func App() *buffalo.App {
 		if ENV != "test" {
 			// Protect against CSRF attacks. https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
 			// Remove to disable this.
-			app.Use(csrf.Middleware)
+			app.Use(csrf.New)
 		}
 
 		// Wraps each request in a transaction.
