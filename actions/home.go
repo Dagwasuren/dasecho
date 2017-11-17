@@ -1,9 +1,9 @@
 package actions
 
 import (
+	"github.com/dasecho/dasecho/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/pop"
-	"github.com/dasecho/dasecho/models"
 	"github.com/pkg/errors"
 )
 
@@ -32,6 +32,6 @@ func HomeHandler(c buffalo.Context) error {
 	}
 	// Make articles available inside the html template
 	c.Set("articles", articles)
-	
+
 	return c.Render(200, r.HTML("index.html"))
 }
