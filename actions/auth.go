@@ -2,13 +2,13 @@ package actions
 
 import (
 	"fmt"
-	"os"
 	"log"
+	"os"
+
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
-  "github.com/markbates/goth/providers/gplus"
-
+	"github.com/markbates/goth/providers/gplus"
 )
 
 func init() {
@@ -18,7 +18,6 @@ func init() {
 		gplus.New(os.Getenv("GPLUS_KEY"), os.Getenv("GPLUS_SECRET"), fmt.Sprintf("%s%s", app.Host, "/auth/gplus/callback")),
 	)
 }
-
 
 func AuthCallback(c buffalo.Context) error {
 	user, err := gothic.CompleteUserAuth(c.Response(), c.Request())
