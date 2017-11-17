@@ -1,6 +1,7 @@
 package actions
 
 import (
+	"log"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/buffalo/middleware"
 	"github.com/gobuffalo/buffalo/middleware/ssl"
@@ -19,6 +20,7 @@ import (
 // application is being run. Default is "development".
 var ENV = envy.Get("GO_ENV", "development")
 var app *buffalo.App
+var WebHost string
 var T *i18n.Translator
 
 // App is where all routes and middleware for buffalo
@@ -64,6 +66,9 @@ func App() *buffalo.App {
 		app.GET("/", HomeHandler)
 
 		app.ServeFiles("/assets", packr.NewBox("../public/assets"))
+		log.Println("Initialized Auth")
+		log.Println("Get webhost ", WebHost)
+		AuthInit() //Initialize the Auth function
 		auth := app.Group("/auth")
 		auth.GET("/{provider}", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))
 		auth.GET("/{provider}/callback", AuthCallback)
