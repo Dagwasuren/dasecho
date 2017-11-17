@@ -1,11 +1,12 @@
 package actions
 
 import (
+	"strconv"
+
+	"github.com/dasecho/dasecho/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/pop"
-	"github.com/dasecho/dasecho/models"
 	"github.com/pkg/errors"
-	"strconv"
 )
 
 // ArticleCreate default implementation.
@@ -36,7 +37,7 @@ func ArticleSaveCreate(c buffalo.Context) error {
 	}
 	uid := s.Get("uid")
 	if uid != nil {
-		a.Uid, _  = strconv.Atoi(string(s.Get("uid").(string)))
+		a.Uid, _ = strconv.Atoi(string(s.Get("uid").(string)))
 	} else {
 		c.Set("message", "请先登录")
 		return c.Render(422, r.HTML("message.html"))
@@ -50,11 +51,12 @@ func ArticleSaveCreate(c buffalo.Context) error {
 		c.Set("errors", verrs)
 		return c.Render(422, r.HTML("message.html"))
 	}
-		c.Set("message", "Insert Success")
-		// Render again the new.html template that the user can
-		// correct the input.
-		return c.Render(200, r.HTML("message.html"))
+	c.Set("message", "Insert Success")
+	// Render again the new.html template that the user can
+	// correct the input.
+	return c.Render(200, r.HTML("message.html"))
 }
+
 // ArticleEdit default implementation.
 func ArticleEdit(c buffalo.Context) error {
 	return c.Render(200, r.HTML("article/edit.html"))
