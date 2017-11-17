@@ -29,14 +29,14 @@ func ArticleSaveCreate(c buffalo.Context) error {
 	s := c.Session()
 	username := s.Get("username")
 	if username != nil {
-		a.Author = string(username)
+		a.Author = string(username.(string))
 	} else {
 		c.Set("message", "请先登录")
 		return c.Render(422, r.HTML("message.html"))
 	}
 	uid := s.Get("uid")
 	if uid != nil {
-		a.Uid, _  = strconv.Atoi(string(s.Get("uid")))
+		a.Uid, _  = strconv.Atoi(string(s.Get("uid").(string)))
 	} else {
 		c.Set("message", "请先登录")
 		return c.Render(422, r.HTML("message.html"))
