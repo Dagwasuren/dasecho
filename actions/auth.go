@@ -3,7 +3,7 @@ package actions
 import (
 	"fmt"
 	"os"
-
+	"log"
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
@@ -14,16 +14,17 @@ import (
 
 )
 
-func init() {
+func AuthInit() {
 	gothic.Store = App().SessionStore
-
+	log.Println(WebHost)
 	goth.UseProviders(
-	facebook.New(os.Getenv("FACEBOOK_KEY"), os.Getenv("FACEBOOK_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/facebook/callback")),
-	github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/github/callback")),
-	twitter.New(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/twitter/callback")),
-	gplus.New(os.Getenv("GPLUS_KEY"), os.Getenv("GPLUS_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/gplus/callback")),
+	facebook.New(os.Getenv("FACEBOOK_KEY"), os.Getenv("FACEBOOK_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/facebook/callback")),
+	github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/github/callback")),
+	twitter.New(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/twitter/callback")),
+	gplus.New(os.Getenv("GPLUS_KEY"), os.Getenv("GPLUS_SECRET"), fmt.Sprintf("%s%s", WebHost, "/auth/gplus/callback")),
 	)
 }
+
 
 func AuthCallback(c buffalo.Context) error {
 	user, err := gothic.CompleteUserAuth(c.Response(), c.Request())
