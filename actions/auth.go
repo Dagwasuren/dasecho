@@ -25,6 +25,13 @@ func AuthCallback(c buffalo.Context) error {
 	if err != nil {
 		return c.Error(401, err)
 	}
+
+	s := c.Session()
+	s.Set("uid", user.UserID)
+	s.Set("avatar", user.AvatarURL)
+	s.Set("username", user.Name)
+	s.Save()
+	return c.Redirect(301, "/")
 	// Do something with the user, maybe register them/sign them in
-	return c.Render(200, r.JSON(user))
+	//return c.Render(200, r.JSON(user))
 }

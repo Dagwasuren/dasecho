@@ -128,6 +128,9 @@
 
 <header>
   <div class="login">
+    <%= if (uid > 0) { %>
+    <p>Welcome <%= username %></p>
+    <% } else { %>
     <p>Login with:
         <ul>
             <%= for (pvd) in Providers { %>
@@ -137,6 +140,7 @@
               <% } %>
           </ul>
     </p>
+    <% } %>
   </div>
   <h1>DasEcho</h1>
 </header>
