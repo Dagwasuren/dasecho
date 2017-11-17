@@ -14,6 +14,7 @@ import (
 	"github.com/gobuffalo/packr"
 
 	"github.com/markbates/goth/gothic"
+	"github.com/gorilla/sessions"
 )
 
 // ENV is used to help switch settings based on where the
@@ -30,6 +31,7 @@ func App() *buffalo.App {
 		app = buffalo.New(buffalo.Options{
 			Env:         ENV,
 			SessionName: "_dasecho_session",
+			SessionStore: sessions.NewCookieStore([]byte(envy.Get("SSKEY", "DKSLFAJ7234DSDFJSAOOZNWEROZ"))),
 		})
 		// Automatically redirect to SSL
 		app.Use(ssl.ForceSSL(secure.Options{
