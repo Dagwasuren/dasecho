@@ -2,6 +2,7 @@ package actions
 
 import (
 	"log"
+
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/buffalo/middleware"
 	"github.com/gobuffalo/buffalo/middleware/ssl"
@@ -13,8 +14,8 @@ import (
 	"github.com/gobuffalo/buffalo/middleware/i18n"
 	"github.com/gobuffalo/packr"
 
-	"github.com/markbates/goth/gothic"
 	"github.com/gorilla/sessions"
+	"github.com/markbates/goth/gothic"
 )
 
 // ENV is used to help switch settings based on where the
@@ -29,8 +30,8 @@ var T *i18n.Translator
 func App() *buffalo.App {
 	if app == nil {
 		app = buffalo.New(buffalo.Options{
-			Env:         ENV,
-			SessionName: "_dasecho_session",
+			Env:          ENV,
+			SessionName:  "_dasecho_session",
 			SessionStore: sessions.NewCookieStore([]byte(envy.Get("SSKEY", "DKSLFAJ7234DSDFJSAOOZNWEROZ"))),
 		})
 		// Automatically redirect to SSL
