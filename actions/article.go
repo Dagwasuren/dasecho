@@ -5,6 +5,7 @@ import (
 	"github.com/markbates/pop"
 	"github.com/dasecho/dasecho/models"
 	"github.com/pkg/errors"
+	"strconv"
 )
 
 // ArticleCreate default implementation.
@@ -28,17 +29,17 @@ func ArticleSaveCreate(c buffalo.Context) error {
 	s := c.Session()
 	username := s.Get("username")
 	if username != nil {
-		a.Author = username.(string)
+		a.Author = string(username)
 	} else {
 		c.Set("message", "请先登录")
 		return c.Render(422, r.HTML("message.html"))
 	}
 	uid := s.Get("uid")
 	if uid != nil {
-		a.Uid = s.Get("uid").(int)
+		a.Uid, _  = strconv.Atoi(string(s.Get("uid")))
 	} else {
-
-		a.Uid = 1
+		c.Set("message", "请先登录")
+		return c.Render(422, r.HTML("message.html"))
 	}
 	// Validate the data from the html form
 	verrs, err := tx.ValidateAndCreate(a)
