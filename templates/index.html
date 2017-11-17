@@ -129,7 +129,8 @@
 <header>
   <div class="login">
     <%= if (uid > 0) { %>
-    <p>Welcome <%= username %></p>
+    <p>Welcome <%= username %> </p>
+    <p><img src="<%= avatar %>" style="max-width: 64px;max-height: 64px"></p>
     <% } else { %>
     <p>Login with:
         <ul>

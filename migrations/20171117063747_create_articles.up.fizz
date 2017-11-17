@@ -1,0 +1,7 @@
+create_table("articles", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("title", "text", {})
+	t.Column("content", "text", {})
+	t.Column("author", "text", {})
+	t.Column("uid", "integer", {})
+})
