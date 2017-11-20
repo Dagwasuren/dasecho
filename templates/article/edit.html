@@ -45,7 +45,7 @@
     });
 </script>
 
-<%= form({action: "/article/save-edit?tid=<%= raw(article.Id) %>", method: "POST"}) { %>
+<%= form({action: "/article/save-edit?tid=<%= raw(article.ID) %>", method: "POST"}) { %>
 <div class="form-group"><label>Title:</label><input name="title" class="form-control" value="<%= raw(article.Title) %>"></div>
 <div class="form-group">
     <label>Content:</label>
