@@ -77,6 +77,10 @@
     padding: 10px;
   }
 
+  div.content p {
+    text-indent: 24px;
+  }
+
   .foot {
     text-align: right;
     text-align: right;
@@ -172,7 +176,9 @@
     <h3><%= a.Title %></h3>
     <div>
       <p class="author"> Author: <%= a.Author %> Created: <%= a.CreatedAt.Format("2006-01-02 15:04:05") %></p>
-     <%= raw(a.Content) %>
+     <div class="content">
+      <%= raw(a.Content) %>
+     </div>
     </div>
   </div>
   <% } %>
