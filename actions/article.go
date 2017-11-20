@@ -130,7 +130,7 @@ func ArticleEdit(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	article := &models.Article{}
 	// You can order your list here. Just change
-	err := tx.Find(&article, tid)
+	err := tx.Where("id = ?", tid).First(article)
 	// to:
 	// err := tx.Order("create_at desc").All(articles)
 	if err != nil {
@@ -158,7 +158,9 @@ func ArticleSaveEdit(c buffalo.Context) error {
 		return c.Render(422, r.HTML("message.html"))
 	}
 
-	tid := c.Param("tid")
+
+	c.Request().ParseForm()
+	tid := c.Request().Form.Get("tid")
 	if tid == "" {
 		c.Set("message", "tid can not be empty")
 		return c.Render(422, r.HTML("message.html"))
@@ -167,13 +169,13 @@ func ArticleSaveEdit(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	article := &models.Article{}
 	// You can order your list here. Just change
-	err := tx.Find(&article, tid)
+
+	err := tx.Where("id = ?", tid).First(article)
 	// to:
 	// err := tx.Order("create_at desc").All(articles)
 	if err != nil {
 		return errors.WithStack(err)
 	}
-	c.Request().ParseForm()
 	article.Title = c.Request().Form.Get("title")
 	article.Content = c.Request().Form.Get("content")
 
@@ -188,7 +190,7 @@ func ArticleSaveEdit(c buffalo.Context) error {
 	}
 	c.Set("message", "Update Success")
 
-	return c.Render(200, r.JSON("message"))
+	return c.Render(200, r.HTML("message.html"))
 }
 
 // ArticleDelete default implementation.
