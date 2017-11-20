@@ -11,7 +11,30 @@ import (
 
 // ArticleCreate default implementation.
 func ArticleCreate(c buffalo.Context) error {
+
 	s := c.Session()
+	c.Set("uid", s.Get("uid"))
+	c.Set("username", s.Get("username"))
+	c.Set("avatar", s.Get("avatar"))
+
+	m := make([]map[string]string, 0)
+	m = append(m, map[string]string{"gplus": "google"})
+	c.Set("Providers", m)
+
+	// Get the DB connection from the context
+	tx := c.Value("tx").(*pop.Connection)
+	articles := &models.Articles{}
+	// You can order your list here. Just change
+	err := tx.Order("created_at desc").All(articles)
+	// to:
+	// err := tx.Order("create_at desc").All(articles)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	// Make articles available inside the html template
+	c.Set("articles", articles)
+
+	s = c.Session()
 	username := s.Get("username")
 	if username == nil {
 		c.Set("message", "请先登录")
@@ -21,13 +44,36 @@ func ArticleCreate(c buffalo.Context) error {
 }
 
 func ArticleSaveCreate(c buffalo.Context) error {
+
+	s := c.Session()
+	c.Set("uid", s.Get("uid"))
+	c.Set("username", s.Get("username"))
+	c.Set("avatar", s.Get("avatar"))
+
+	m := make([]map[string]string, 0)
+	m = append(m, map[string]string{"gplus": "google"})
+	c.Set("Providers", m)
+
+	// Get the DB connection from the context
+	tx := c.Value("tx").(*pop.Connection)
+	articles := &models.Articles{}
+	// You can order your list here. Just change
+	err := tx.Order("created_at desc").All(articles)
+	// to:
+	// err := tx.Order("create_at desc").All(articles)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	// Make articles available inside the html template
+	c.Set("articles", articles)
+
 	a := &models.Article{}
 	c.Request().ParseForm()
 	a.Title = c.Request().Form.Get("title")
 	a.Content = c.Request().Form.Get("content")
 	// Get the DB connection from the context
-	tx := c.Value("tx").(*pop.Connection)
-	s := c.Session()
+	tx = c.Value("tx").(*pop.Connection)
+	s = c.Session()
 	username := s.Get("username")
 	if username != nil {
 		a.Author = string(username.(string))
@@ -59,13 +105,82 @@ func ArticleSaveCreate(c buffalo.Context) error {
 
 // ArticleEdit default implementation.
 func ArticleEdit(c buffalo.Context) error {
+
+	s := c.Session()
+	c.Set("uid", s.Get("uid"))
+	c.Set("username", s.Get("username"))
+	c.Set("avatar", s.Get("avatar"))
+
+	m := make([]map[string]string, 0)
+	m = append(m, map[string]string{"gplus": "google"})
+	c.Set("Providers", m)
+
+	// Get the DB connection from the context
+	tx := c.Value("tx").(*pop.Connection)
+	articles := &models.Articles{}
+	// You can order your list here. Just change
+	err := tx.Order("created_at desc").All(articles)
+	// to:
+	// err := tx.Order("create_at desc").All(articles)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	// Make articles available inside the html template
+	c.Set("articles", articles)
+
 	return c.Render(200, r.HTML("article/edit.html"))
 }
 func ArticleSaveEdit(c buffalo.Context) error {
+
+	s := c.Session()
+	c.Set("uid", s.Get("uid"))
+	c.Set("username", s.Get("username"))
+	c.Set("avatar", s.Get("avatar"))
+
+	m := make([]map[string]string, 0)
+	m = append(m, map[string]string{"gplus": "google"})
+	c.Set("Providers", m)
+
+	// Get the DB connection from the context
+	tx := c.Value("tx").(*pop.Connection)
+	articles := &models.Articles{}
+	// You can order your list here. Just change
+	err := tx.Order("created_at desc").All(articles)
+	// to:
+	// err := tx.Order("create_at desc").All(articles)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	// Make articles available inside the html template
+	c.Set("articles", articles)
+
 	return c.Render(200, r.JSON("message"))
 }
 
 // ArticleDelete default implementation.
 func ArticleDelete(c buffalo.Context) error {
+
+	s := c.Session()
+	c.Set("uid", s.Get("uid"))
+	c.Set("username", s.Get("username"))
+	c.Set("avatar", s.Get("avatar"))
+
+	m := make([]map[string]string, 0)
+	m = append(m, map[string]string{"gplus": "google"})
+	c.Set("Providers", m)
+
+	// Get the DB connection from the context
+	tx := c.Value("tx").(*pop.Connection)
+	articles := &models.Articles{}
+	// You can order your list here. Just change
+	err := tx.Order("created_at desc").All(articles)
+	// to:
+	// err := tx.Order("create_at desc").All(articles)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	// Make articles available inside the html template
+	c.Set("articles", articles)
+
 	return c.Render(200, r.HTML("article/delete.html"))
 }
