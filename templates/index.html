@@ -4,7 +4,9 @@
   <div class="article-block">
     <h3><%= a.Title %></h3>
     <div>
-      <p class="author"> Author: <%= a.Author %> Created: <%= a.CreatedAt.Format("2006-01-02 15:04:05") %></p>
+      <p class="author"> Author: <%= a.Author %> Created: <%= a.CreatedAt.Format("2006-01-02 15:04:05") %> <%= if (uid > 0) { %>
+        <a href="/article/edit?tid=<%= a.Id %>">[Edit]</a><% } %>
+      </p>
      <div class="content">
       <%= raw(a.Content) %>
      </div>
