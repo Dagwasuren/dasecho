@@ -126,6 +126,10 @@
             display: block;
         }
     }
+    .message {
+        width: 62%;
+        margin: 50px auto;
+    }
 </style>
 
 <header>
@@ -133,6 +137,7 @@
 </header>
 
 <div class="row">
+    <div class="message">
     <%= if (message) { %>
     <%= message %>
     <% }  %>
@@ -140,6 +145,6 @@
     <%= if (errors) { %>
     <%= errors %>
     <% }  %>
-
+    </div>
 </div>
 <div class="foot"> <span> All rights reserved by DasEcho Team</span> </div>
