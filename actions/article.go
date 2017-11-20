@@ -7,7 +7,6 @@ import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/pop"
 	"github.com/pkg/errors"
-	"golang.org/x/tools/go/gcimporter15/testdata"
 )
 
 // ArticleCreate default implementation.
