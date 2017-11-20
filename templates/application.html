@@ -148,6 +148,17 @@
         display: block;
       }
     }
+    .author-name {
+      font-weight: bold
+    }
+
+    header a:link, a:visited {
+      color: #0069c3;
+    }
+
+    header a:hover, a:active {
+      color: #0069c3;
+    }
   </style>
 
     <div class="container">
@@ -186,7 +197,7 @@
       <%= partial("flash.html") %>
       <%= yield %>
 
-      <div class="foot"> <span> All rights reserved by DasEcho Team</span> </div>
+      <div class="foot"> <span> All rights reserved by <a href="https://dasecho.net">DasEcho</a> <a href="https://github.com/dasecho">Team</a></span> </div>
 
     </div>
 
