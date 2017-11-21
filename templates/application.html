@@ -159,6 +159,10 @@
     header a:hover, a:active {
       color: #0069c3;
     }
+    .main-menu {
+      float:right;
+      width:50%;
+    }
   </style>
 
     <div class="container">
@@ -166,7 +170,7 @@
       <header>
         <div class="login">
           <%= if (uid > 0) { %>
-          <p>Welcome <%= username %> <ul>
+          <p>Welcome <%= username %> <ul class="main-menu">
           <li><a href="/article/create">Create article</a></li>
           <li><a href="/todaybest/list">Todaybests</a></li>
           <li><a href="/todaybest/create">New Todaybest</a></li>
