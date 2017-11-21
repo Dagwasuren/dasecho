@@ -1,16 +1,14 @@
 package actions
 
 import (
-	"strconv"
-
 	"github.com/dasecho/dasecho/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/pop"
 	"github.com/pkg/errors"
 )
 
-// ArticleCreate default implementation.
-func ArticleCreate(c buffalo.Context) error {
+// TodaybestCreate default implementation.
+func TodaybestCreate(c buffalo.Context) error {
 
 	s := c.Session()
 	c.Set("uid", s.Get("uid"))
@@ -20,19 +18,6 @@ func ArticleCreate(c buffalo.Context) error {
 	m := make([]map[string]string, 0)
 	m = append(m, map[string]string{"gplus": "google"})
 	c.Set("Providers", m)
-
-	// Get the DB connection from the context
-	tx := c.Value("tx").(*pop.Connection)
-	articles := &models.Articles{}
-	// You can order your list here. Just change
-	err := tx.Order("created_at desc").All(articles)
-	// to:
-	// err := tx.Order("create_at desc").All(articles)
-	if err != nil {
-		return errors.WithStack(err)
-	}
-	// Make articles available inside the html template
-	c.Set("articles", articles)
 
 	s = c.Session()
 	username := s.Get("username")
@@ -40,10 +25,10 @@ func ArticleCreate(c buffalo.Context) error {
 		c.Set("message", "请先登录")
 		return c.Render(422, r.HTML("message.html"))
 	}
-	return c.Render(200, r.HTML("article/create.html"))
+	return c.Render(200, r.HTML("todaybest/create.html"))
 }
 
-func ArticleSaveCreate(c buffalo.Context) error {
+func TodaybestSaveCreate(c buffalo.Context) error {
 
 	s := c.Session()
 	c.Set("uid", s.Get("uid"))
@@ -54,40 +39,13 @@ func ArticleSaveCreate(c buffalo.Context) error {
 	m = append(m, map[string]string{"gplus": "google"})
 	c.Set("Providers", m)
 
-	// Get the DB connection from the context
 	tx := c.Value("tx").(*pop.Connection)
-	articles := &models.Articles{}
-	// You can order your list here. Just change
-	err := tx.Order("created_at desc").All(articles)
-	// to:
-	// err := tx.Order("create_at desc").All(articles)
-	if err != nil {
-		return errors.WithStack(err)
-	}
-	// Make articles available inside the html template
-	c.Set("articles", articles)
 
-	a := &models.Article{}
+	a := &models.Todaybest{}
 	c.Request().ParseForm()
-	a.Title = c.Request().Form.Get("title")
 	a.Content = c.Request().Form.Get("content")
 	// Get the DB connection from the context
-	tx = c.Value("tx").(*pop.Connection)
 	s = c.Session()
-	username := s.Get("username")
-	if username != nil {
-		a.Author = string(username.(string))
-	} else {
-		c.Set("message", "请先登录")
-		return c.Render(422, r.HTML("message.html"))
-	}
-	uid := s.Get("uid")
-	if uid != nil {
-		a.Uid, _ = strconv.Atoi(string(s.Get("uid").(string)))
-	} else {
-		c.Set("message", "请先登录")
-		return c.Render(422, r.HTML("message.html"))
-	}
 	// Validate the data from the html form
 	verrs, err := tx.ValidateAndCreate(a)
 	if err != nil {
@@ -103,8 +61,8 @@ func ArticleSaveCreate(c buffalo.Context) error {
 	return c.Render(200, r.HTML("message.html"))
 }
 
-// ArticleEdit default implementation.
-func ArticleEdit(c buffalo.Context) error {
+// TodaybestEdit default implementation.
+func TodaybestEdit(c buffalo.Context) error {
 
 	s := c.Session()
 	c.Set("uid", s.Get("uid"))
@@ -128,21 +86,52 @@ func ArticleEdit(c buffalo.Context) error {
 	}
 	// Get the DB connection from the context
 	tx := c.Value("tx").(*pop.Connection)
-	article := &models.Article{}
+	todaybest := &models.Todaybest{}
 	// You can order your list here. Just change
-	err := tx.Where("id = ?", tid).First(article)
+	err := tx.Where("id = ?", tid).First(todaybest)
+	// to:
+	// err := tx.Order("create_at desc").All(Todaybests)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	c.Set("todaybest", todaybest)
+
+	return c.Render(200, r.HTML("todaybest/edit.html"))
+}
+
+func TodaybestList(c buffalo.Context) error {
+
+	s := c.Session()
+	c.Set("uid", s.Get("uid"))
+	c.Set("username", s.Get("username"))
+	c.Set("avatar", s.Get("avatar"))
+
+	m := make([]map[string]string, 0)
+	m = append(m, map[string]string{"gplus": "google"})
+	c.Set("Providers", m)
+
+	username := s.Get("username")
+	if username == nil {
+		c.Set("message", "请先登录")
+		return c.Render(422, r.HTML("message.html"))
+	}
+
+	// Get the DB connection from the context
+	tx := c.Value("tx").(*pop.Connection)
+	todaybests := &models.Todaybests{}
+
+	err := tx.Order("created_at desc").All(todaybests)
 	// to:
 	// err := tx.Order("create_at desc").All(articles)
 	if err != nil {
 		return errors.WithStack(err)
 	}
 	// Make articles available inside the html template
-	c.Set("article", article)
+	c.Set("todaybests", todaybests)
 
-	return c.Render(200, r.HTML("article/edit.html"))
+	return c.Render(200, r.HTML("todaybest/list.html"))
 }
-func ArticleSaveEdit(c buffalo.Context) error {
-
+func TodaybestSaveEdit(c buffalo.Context) error {
 	s := c.Session()
 	c.Set("uid", s.Get("uid"))
 	c.Set("username", s.Get("username"))
@@ -166,20 +155,19 @@ func ArticleSaveEdit(c buffalo.Context) error {
 	}
 	// Get the DB connection from the context
 	tx := c.Value("tx").(*pop.Connection)
-	article := &models.Article{}
+	Todaybest := &models.Todaybest{}
 	// You can order your list here. Just change
 
-	err := tx.Where("id = ?", tid).First(article)
+	err := tx.Where("id = ?", tid).First(Todaybest)
 	// to:
-	// err := tx.Order("create_at desc").All(articles)
+	// err := tx.Order("create_at desc").All(Todaybests)
 	if err != nil {
 		return errors.WithStack(err)
 	}
-	article.Title = c.Request().Form.Get("title")
-	article.Content = c.Request().Form.Get("content")
+	Todaybest.Content = c.Request().Form.Get("content")
 
 	// Validate the data from the html form
-	verrs, err := tx.ValidateAndUpdate(article)
+	verrs, err := tx.ValidateAndUpdate(Todaybest)
 	if err != nil {
 		return errors.WithStack(err)
 	}
@@ -192,8 +180,8 @@ func ArticleSaveEdit(c buffalo.Context) error {
 	return c.Render(200, r.HTML("message.html"))
 }
 
-// ArticleDelete default implementation.
-func ArticleDelete(c buffalo.Context) error {
+// TodaybestDelete default implementation.
+func TodaybestDelete(c buffalo.Context) error {
 
 	s := c.Session()
 	c.Set("uid", s.Get("uid"))
@@ -206,16 +194,16 @@ func ArticleDelete(c buffalo.Context) error {
 
 	// Get the DB connection from the context
 	tx := c.Value("tx").(*pop.Connection)
-	articles := &models.Articles{}
+	Todaybests := &models.Todaybests{}
 	// You can order your list here. Just change
-	err := tx.Order("created_at desc").All(articles)
+	err := tx.Order("created_at desc").All(Todaybests)
 	// to:
-	// err := tx.Order("create_at desc").All(articles)
+	// err := tx.Order("create_at desc").All(Todaybests)
 	if err != nil {
 		return errors.WithStack(err)
 	}
-	// Make articles available inside the html template
-	c.Set("articles", articles)
+	// Make Todaybests available inside the html template
+	c.Set("Todaybests", Todaybests)
 
-	return c.Render(200, r.HTML("article/delete.html"))
+	return c.Render(200, r.HTML("todaybest/delete.html"))
 }

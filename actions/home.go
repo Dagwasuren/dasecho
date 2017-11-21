@@ -5,6 +5,7 @@ import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/pop"
 	"github.com/pkg/errors"
+	"log"
 )
 
 // HomeHandler is a default handler to serve up
@@ -20,6 +21,9 @@ func HomeHandler(c buffalo.Context) error {
 	m = append(m, map[string]string{"gplus": "google"})
 	c.Set("Providers", m)
 
+
+
+
 	// Get the DB connection from the context
 	tx := c.Value("tx").(*pop.Connection)
 	articles := &models.Articles{}
@@ -32,6 +36,18 @@ func HomeHandler(c buffalo.Context) error {
 	}
 	// Make articles available inside the html template
 	c.Set("articles", articles)
+
+
+
+	todaybest := &models.Todaybest{}
+	err = tx.Order("created_at desc").First(todaybest)
+	if err != nil {
+		log.Println(err)
+		c.Set("todaybest", nil)
+	} else {
+		c.Set("todaybest", todaybest)
+	}
+
 
 	return c.Render(200, r.HTML("index.html"))
 }

@@ -166,7 +166,11 @@
       <header>
         <div class="login">
           <%= if (uid > 0) { %>
-          <p>Welcome <%= username %> <a href="/article/create">Create article</a></p>
+          <p>Welcome <%= username %> <ul>
+          <li><a href="/article/create">Create article</a></li>
+          <li><a href="/todaybest/list">Todaybests</a></li>
+          <li><a href="/todaybest/create">New Todaybest</a></li>
+        </ul></p>
           <p><img src="<%= avatar %>" style="max-width: 32px;max-height: 32px"></p>
 
           <% } else { %>
@@ -200,10 +204,6 @@
       <div class="foot"> <span> All rights reserved by <a href="https://dasecho.net">DasEcho</a> <a href="https://github.com/dasecho">Team</a></span> </div>
 
     </div>
-
-
-
-
 
     <script src="/assets/application.js" type="text/javascript" charset="utf-8"></script>
   </body>

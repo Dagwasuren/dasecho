@@ -1,5 +1,10 @@
 
 <div class="row">
+    <%= if (todaybest) { %>
+    <div class="article-block">
+        <%= raw(todaybest.Content) %>
+    </div>
+    <% } %>
   <%= for (a) in articles { %>
   <div class="article-block">
     <h3><%= a.Title %></h3>
