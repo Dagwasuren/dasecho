@@ -19,7 +19,6 @@ pipeline {
                     echo 'Deploying....'
                     sh "rsync -avzP ./* /data/www/dasecho.net/"                
                     sh "cd /data/www/web-svc && ls -al && ./force-replace.sh dasecho &&./reload.sh"
-                    sh "cd /data/www/dasecho.net && sh migrate.sh "
                 }
             }
         }
