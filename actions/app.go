@@ -28,9 +28,14 @@ var T *i18n.Translator
 // should be defined. This is the nerve center of your
 // application.
 func App() *buffalo.App {
+	appHost := "http://dev.dasecho.net:3000"
+	if ENV == "production" {
+		appHost = "https://dasecho.net"
+	}
 	if app == nil {
 		app = buffalo.New(buffalo.Options{
 			Env:          ENV,
+			Host:         appHost,
 			SessionName:  "_dasecho_session",
 			SessionStore: sessions.NewCookieStore([]byte(envy.Get("SSKEY", "DKSLFAJ7234DSDFJSAOOZNWEROZ"))),
 		})
