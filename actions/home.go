@@ -22,6 +22,9 @@ func HomeHandler(c buffalo.Context) error {
 	m = append(m, map[string]string{"gplus": "google"})
 	c.Set("Providers", m)
 
+
+
+
 	// Get the DB connection from the context
 	tx := c.Value("tx").(*pop.Connection)
 
@@ -39,7 +42,6 @@ func HomeHandler(c buffalo.Context) error {
 
 	// Make articles available inside the html template
 	c.Set("articles", articles)
-
 	todaybest := &models.Todaybest{}
 	err = tx.Order("created_at desc").First(todaybest)
 	if err != nil {
