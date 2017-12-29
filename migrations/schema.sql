@@ -11,3 +11,9 @@ CREATE TABLE IF NOT EXISTS "articles" (
 "author" text NOT NULL,
 "uid" integer NOT NULL
 );
+CREATE TABLE IF NOT EXISTS "todaybests" (
+"created_at" DATETIME NOT NULL,
+"updated_at" DATETIME NOT NULL,
+"id" TEXT PRIMARY KEY,
+"content" TEXT NOT NULL
+);

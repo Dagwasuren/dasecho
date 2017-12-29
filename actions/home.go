@@ -1,6 +1,8 @@
 package actions
 
 import (
+	"log"
+
 	"github.com/dasecho/dasecho/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/pop"
@@ -37,6 +39,15 @@ func HomeHandler(c buffalo.Context) error {
 
 	// Make articles available inside the html template
 	c.Set("articles", articles)
+
+	todaybest := &models.Todaybest{}
+	err = tx.Order("created_at desc").First(todaybest)
+	if err != nil {
+		log.Println(err)
+		c.Set("todaybest", nil)
+	} else {
+		c.Set("todaybest", todaybest)
+	}
 
 	return c.Render(200, r.HTML("index.html"))
 }

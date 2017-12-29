@@ -83,6 +83,12 @@ func App() *buffalo.App {
 		app.GET("/article/edit", ArticleEdit)
 		app.POST("/article/save-edit", ArticleSaveEdit)
 		app.GET("/article/delete", ArticleDelete)
+		app.GET("/todaybest/create", TodaybestCreate)
+		app.POST("/todaybest/save-create", TodaybestSaveCreate)
+		app.GET("/todaybest/edit", TodaybestEdit)
+		app.GET("/todaybest/list", TodaybestList)
+		app.POST("/todaybest/save-edit", TodaybestSaveEdit)
+		app.GET("/todaybest/delete", TodaybestDelete)
 	}
 
 	return app

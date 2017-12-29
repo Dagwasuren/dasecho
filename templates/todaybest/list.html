@@ -1,0 +1,13 @@
+
+<%= if (todaybests) { %>
+<div class="row">
+  <%= for (a) in todaybests { %>
+  <div class="article-block">
+     <div class="content">
+      <%= raw(a.Content) %>
+         <p><a href="/todaybest/edit?tid=<%= a.ID %>">[Edit]</a><% } %></p>
+     </div>
+  </div>
+  <% } %>
+</div>
+<% } %>

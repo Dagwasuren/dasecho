@@ -43,7 +43,7 @@
 
 [[constraint]]
   name = "github.com/markbates/pop"
-  version = "3.37.1"
+  version = "3.40.1"
 
 [[constraint]]
   branch = "master"

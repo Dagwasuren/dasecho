@@ -1,0 +1,4 @@
+create_table("todaybests", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("content", "string", {})
+})
