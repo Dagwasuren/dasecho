@@ -1,4 +1,4 @@
-<h1>Article Create</h1>
+<h1>todaybest Edit</h1>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.2/tinymce.min.js"></script>
 <script type="text/javascript">
@@ -44,13 +44,14 @@
         extended_valid_elements: "pre[class],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]"
     });
 </script>
-<%= form({action: "/article/save-create", method: "POST"}) { %>
-<div class="form-group"><label>Title:</label><input name="title" class="form-control"></div>
+
+<%= form({action: "/todaybest/save-edit", method: "POST"}) { %>
 <div class="form-group">
     <label>Content:</label>
-    <textarea name="content" class="form-control" style="height:500px"></textarea></div>
+    <textarea name="content" class="form-control" style="height:500px"><%= raw(todaybest.Content) %></textarea></div>
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
+        <input type="hidden" name="tid" value="<%= todaybest.ID %>"/>
         <button type="submit">Save</button>
     </div>
 </div>

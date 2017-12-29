@@ -159,7 +159,7 @@
 
 [[projects]]
   name = "github.com/markbates/goth"
-  packages = [".","gothic","providers/facebook","providers/github","providers/gplus","providers/twitter"]
+  packages = [".","gothic","providers/gplus"]
   revision = "86ca064cf1b7ebefa670bdc9eaadba0f3a6d9607"
   version = "v1.43.0"
 
@@ -215,7 +215,7 @@
   branch = "master"
   name = "github.com/mattn/anko"
   packages = ["ast","builtins","builtins/encoding/json","builtins/errors","builtins/flag","builtins/fmt","builtins/github.com/daviddengcn/go-colortext","builtins/io","builtins/io/ioutil","builtins/math","builtins/math/big","builtins/math/rand","builtins/net","builtins/net/http","builtins/net/url","builtins/os","builtins/os/exec","builtins/os/signal","builtins/path","builtins/path/filepath","builtins/regexp","builtins/runtime","builtins/sort","builtins/strings","builtins/time","parser","vm"]
-  revision = "dcc8a6616ddbc481469f05b66b4590e3589051b6"
+  revision = "fcad00084ff32e5bd934a08cab30a3a60b6a2373"
 
 [[projects]]
   name = "github.com/mattn/go-colorable"
@@ -252,12 +252,6 @@
   packages = ["."]
   revision = "99ca9dcbaca6d91e9665f817d0da23af6184ced3"
   version = "v3.0"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/mrjones/oauth"
-  packages = ["."]
-  revision = "3f67d9c274355678b2f9844b08d643e2f9213340"
 
 [[projects]]
   name = "github.com/nicksnyder/go-i18n"
@@ -413,7 +407,7 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows"]
-  revision = "bf42f188b9bc6f2cf5b8ee5a912ef1aedd0eba4c"
+  revision = "0dd5e194bbf5eb84a39666eb4c98a4d007e4203a"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -430,6 +424,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "9691039c2e012e710cc467fab107440b0851f35fe9e3f421cab1aa079faa7b04"
+  inputs-digest = "5c523bca19b0e7caba5751e6f140e77282e2878cfc2cbdfa336167143c659828"
   solver-name = "gps-cdcl"
   solver-version = 1
