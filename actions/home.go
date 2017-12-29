@@ -30,7 +30,7 @@ func HomeHandler(c buffalo.Context) error {
 	// Paginate results. Params "page" and "per_page" control     pagination.
 	// Default values are "page=1" and "per_page=2".
 	q := tx.PaginateFromParams(c.Params())
-	err := q.All(articles)
+	err := q.Order("created_at desc").All(articles)
 	if err != nil {
 		return errors.WithStack(err)
 	}
