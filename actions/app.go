@@ -4,15 +4,16 @@ import (
 	"log"
 
 	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/buffalo/middleware"
-	"github.com/gobuffalo/buffalo/middleware/ssl"
+	"github.com/gobuffalo/mw-paramlogger"
+	"github.com/gobuffalo/buffalo/mw-forcessl"
 	"github.com/gobuffalo/envy"
 	"github.com/unrolled/secure"
 
 	"github.com/netroby/dasecho/models"
-	"github.com/gobuffalo/buffalo/middleware/csrf"
-	"github.com/gobuffalo/buffalo/middleware/i18n"
+	"github.com/gobuffalo/buffalo/mw-csrf"
+	"github.com/gobuffalo/buffalo/mw-i18n"
 	"github.com/gobuffalo/packr"
+	"github.com/gobuffalo/buffalo-pop/pop/popmw"
 
 	"github.com/gorilla/sessions"
 	"github.com/markbates/goth/gothic"
@@ -49,7 +50,7 @@ func App() *buffalo.App {
 		// Handler does not return an error.
 
 		if ENV == "development" {
-			app.Use(middleware.ParameterLogger)
+			app.Use(paramlogger.ParameterLogger)
 		}
 
 		if ENV != "test" {
@@ -61,7 +62,7 @@ func App() *buffalo.App {
 		// Wraps each request in a transaction.
 		//  c.Value("tx").(*pop.PopTransaction)
 		// Remove to disable this.
-		app.Use(middleware.PopTransaction(models.DB))
+		app.Use(popmw.Transaction(models.DB))
 
 		// Setup and use translations:
 		var err error
