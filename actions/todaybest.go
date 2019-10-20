@@ -1,7 +1,7 @@
 package actions
 
 import (
-	"github.com/dasecho/dasecho/models"
+	"github.com/netroby/dasecho/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/pop"
 	"github.com/pkg/errors"

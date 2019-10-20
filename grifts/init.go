@@ -1,7 +1,7 @@
 package grifts
 
 import (
-	"github.com/dasecho/dasecho/actions"
+	"github.com/netroby/dasecho/actions"
 	"github.com/gobuffalo/buffalo"
 )
 
