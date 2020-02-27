@@ -4,10 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "babel-cli": "latest",
-    "babel-core": "latest",
-    "babel-loader": "latest",
-    "babel-preset-env": "latest",
     "bootstrap-sass": "^3.4.1",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
