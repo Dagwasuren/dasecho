@@ -1,6 +1,6 @@
 var webpack = require("webpack");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: [
